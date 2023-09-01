@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
 const mongoose = require('mongoose');
 const fetch = require('isomorphic-unfetch');
 const spotify = require('spotify-url-info');
@@ -12,24 +11,17 @@ const uri = "mongodb+srv://erenakhan:erenakhan123@cluster0.nkwtsfn.mongodb.net/?
 
 const Point = require('./models/point.js');
 
+const port = 5000;
+const app = express();
+
 const corsOptions = {
     origin: ['http://127.0.0.1:5173', 'https://findthesong.vercel.app'],
     credentials: true,
   };
-  app.use(cors(corsOptions));
 
 app.use(express.json())
 app.use(bodyParser.json())
-
-
-
-const db = mongoose.connection;
-db.once('open', () => {
-  console.log('MongoDB connection ok.');
-});
-db.on('error', (err) => {
-  console.error('MongoDB connection not ok:', err);
-});
+app.use(cors(corsOptions));
 
 const baseURL = "https://open.spotify.com/track/";
 
@@ -66,20 +58,20 @@ getTracks('https://open.spotify.com/playlist/37i9dQZF1DXb7MJRXLczzR')
         trHits90.push(song)});
     })
 
- app.get('/server/songTr' ,(req, res) => {
+ app.get('/api/songTr' ,(req, res) => {
         res.send(trHits);
     });
-app.get('/server/songGlobal' ,(req, res) => {
+app.get('/api/songGlobal' ,(req, res) => {
         res.send(globalHits);
     });
- app.get('/server/songTr90' ,(req, res) => {
+ app.get('/api/songTr90' ,(req, res) => {
         res.send(trHits90);
     });
-app.get('/server/songGlobal20' ,(req, res) => {
+app.get('/api/songGlobal20' ,(req, res) => {
         res.send(globalHits20);
     });
 
-app.post("/server/addPoint", async(req, res) => {
+app.post("/api/addPoint", async(req, res) => {
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const {name,point,mongooseType} =req.body;
     const newPoint = new Point({name,point,mongooseType});
@@ -87,13 +79,13 @@ app.post("/server/addPoint", async(req, res) => {
     res.send(userDoc);
 })
 
-app.get("/server/getPoint",async (req, res) =>{
+app.get("/api/getPoint",async (req, res) =>{
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const points = await Point.find();
   res.send(points)
 })
 
-const port = 5000;
+
 
 app.use(cors());
 
