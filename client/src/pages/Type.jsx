@@ -7,48 +7,46 @@ export default function Type() {
     const { name ,songType,setSongType,songTr,setSongTr,songGlobal,setSongGlobal,setMongooseType,mongooseType,songTr90,setSongTr90,songGlobal20,setSongGlobal20} = useContext(UserContext);
     const navigate = useNavigate();
 
+
     useEffect(() => {
-      axios.get('https://findthesong.vercel.app/api/songTr')
-        .then(response => {
-          setSongTr(response.data);
-          console.log(songTr);
-        })
-        .catch(error => {
-          console.error('Hata:', error);
-        });
-  }, []);
-  
-  useEffect(() => {
-      axios.get('https://findthesong.vercel.app/api/songGlobal')
-        .then(response => {
-          setSongGlobal(response.data);
-        })
-        .catch(error => {
-          console.error('Hata:', error);
-        });
-  }, []);
-  
-  useEffect(() => {
-      axios.get('https://findthesong.vercel.app/api/songTr90')
-        .then(response => {
-          setSongTr90(response.data);
-          console.log(songTr);
-        })
-        .catch(error => {
-          console.error('Hata:', error);
-        });
-  }, []);
-  
-  useEffect(() => {
-      axios.get('https://findthesong.vercel.app/api/songGlobal20')
-        .then(response => {
-          setSongGlobal20(response.data);
-        })
-        .catch(error => {
-          console.error('Hata:', error);
-        });
-  }, []);
-  
+        if (songType&&mongooseType) {
+            navigate('/game');
+        }
+    }, [songType, navigate]);
+    useEffect(() => {
+        axios.get('https://findthesong.vercel.app/api/songTr')
+          .then(response => {
+            setSongTr(response.data);
+            console.log(songTr)
+          })
+          .catch(error => {
+            console.error('Hata:', error);
+          });
+    
+        axios.get('https://findthesong.vercel.app/api/songGlobal')
+          .then(response => {
+            setSongGlobal(response.data);
+          })
+          .catch(error => {
+            console.error('Hata:', error);
+          });
+        axios.get('https://findthesong.vercel.app/api/songTr90')
+          .then(response => {
+            setSongTr90(response.data);
+            console.log(songTr)
+          })
+          .catch(error => {
+            console.error('Hata:', error);
+          });
+    
+        axios.get('https://findthesong.vercel.app/api/songGlobal20')
+          .then(response => {
+            setSongGlobal20(response.data);
+          })
+          .catch(error => {
+            console.error('Hata:', error);
+          });
+      }, [songType]); 
 
       const handleButtonClickGl = () => {
         setSongType(songGlobal);
