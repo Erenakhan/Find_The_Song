@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Game from './pages/game';
+import React from 'react';
+import {Routes, Route } from 'react-router-dom';
 import Index from './pages/Index';
 import Layout from './pages/Layout';
 import Type from './pages/Type';
 import { UserContextProvider } from './contex';
 import Result from './pages/Result';
+import Game from './pages/game';
 
 
 export default function App() {
