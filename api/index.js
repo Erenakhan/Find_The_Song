@@ -86,9 +86,6 @@ app.get("/api/getPoint",async (req, res) =>{
 })
 
 
-
-app.use(cors());
-
 app.get('/', (req, res) => {
     res.send(`Server is running on port ${port}`)
 });
