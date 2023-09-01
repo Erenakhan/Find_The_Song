@@ -5,7 +5,9 @@ import Layout from './pages/Layout';
 import Type from './pages/Type';
 import { UserContextProvider } from './contex';
 import Result from './pages/Result';
-import Game from './pages/game';
+import Game from './pages/Game';
+
+
 
 
 export default function App() {
