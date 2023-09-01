@@ -24,6 +24,7 @@ app.use(bodyParser.json())
 app.use(cors(corsOptions));
 
 const baseURL = "https://open.spotify.com/track/";
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const trHits = [];
 const globalHits = [];
