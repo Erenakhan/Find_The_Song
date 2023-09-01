@@ -12,7 +12,12 @@ const uri = "mongodb+srv://erenakhan:erenakhan123@cluster0.nkwtsfn.mongodb.net/?
 
 const Point = require('./models/point.js');
 
-app.use(cors());
+const corsOptions = {
+    origin: ['http://127.0.0.1:5173', 'https://findthesong.vercel.app'],
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+
 app.use(express.json())
 app.use(bodyParser.json())
 
