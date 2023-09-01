@@ -1,21 +1,21 @@
-import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contex';
 import { useNavigate } from 'react-router-dom';
 
 
 export default function Game() {
- 
   const [audioSource, setAudioSource] = useState(""); 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState({}); 
   const [audioPlayer, setAudioPlayer] = useState(new Audio()); 
   const [songReady, setSongReady] = useState(false); 
-  const [playedSong, setPlayedSong] = useState([])
-  const [startCount,setStartCount]=useState(60)
-  const[count,setCount]=useState(10)
-  const [mixedSong,setMixedSong]=useState([])
-  const [gameFinished,setGameFinised]=useState(false)
+  const [playedSong, setPlayedSong] = useState([]);
+  const [startCount,setStartCount]=useState(60);
+  const[count,setCount]=useState(10);
+  const [mixedSong,setMixedSong]=useState([]);
+  const [gameFinished,setGameFinised]=useState(false);
+  const [selected,setSelected]=useState();
+  const [target,setTarget]=useState(false);
   const navigate = useNavigate();
   const [b,setB]=useState();
   const [c,setC]=useState();
@@ -33,8 +33,6 @@ export default function Game() {
       navigate('/');
       return;
     }
-  
-
     setPlayedSong(prevPlayedSong => [...prevPlayedSong, randomIndex]);
   
 
@@ -144,8 +142,6 @@ export default function Game() {
   function getRandomNumber(max) {
     return Math.floor(Math.random() * max);
   }
-  const [selected,setSelected]=useState();
-  const [target,setTarget]=useState(false);
   let  trueCurrentPoint =  count * 19; 
   const check = (song) => {
     if (song === currentSong) {
@@ -182,9 +178,8 @@ export default function Game() {
     audioPlayer.pause();
     setCurrentSong()
     navigate('/result');
-    return;
-   
   }
+ 
   return (
     <div className='w-screen min-h-screen flex flex-col  bg-gradient-to-tr from-gray-800 via-gray-600 to-green-800 relative '>
      {isPlaying &&   <div >
