@@ -14,8 +14,8 @@ export default function Result() {
 
     const fetchData = async () => {
         try {
-            await axios.post("http://localhost:5000/addPoint", { name, mongooseType, point });
-            const response = await axios.get("http://localhost:5000/getPoint");
+            await axios.post("http://localhost:5000/server/addPoint", { name, mongooseType, point });
+            const response = await axios.get("http://localhost:5000/server/getPoint");
             setData(response.data);
         } catch (error) {
             console.error("Error:", error);

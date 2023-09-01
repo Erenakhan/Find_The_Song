@@ -14,7 +14,7 @@ export default function Type() {
         }
     }, [songType, navigate]);
     useEffect(() => {
-        axios.get('http://localhost:5000/songTr')
+        axios.get('http://localhost:5000/server/songTr')
           .then(response => {
             setSongTr(response.data);
             console.log(songTr)
@@ -23,14 +23,14 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('http://localhost:5000/songGlobal')
+        axios.get('http://localhost:5000/server/songGlobal')
           .then(response => {
             setSongGlobal(response.data);
           })
           .catch(error => {
             console.error('Hata:', error);
           });
-        axios.get('http://localhost:5000/songTr90')
+        axios.get('http://localhost:5000/server/songTr90')
           .then(response => {
             setSongTr90(response.data);
             console.log(songTr)
@@ -39,7 +39,7 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('http://localhost:5000/songGlobal20')
+        axios.get('http://localhost:5000/server/songGlobal20')
           .then(response => {
             setSongGlobal20(response.data);
           })

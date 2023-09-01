@@ -15,7 +15,7 @@ const Point = require('./models/point.js');
 app.use(cors());
 app.use(express.json())
 app.use(bodyParser.json())
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 
 const db = mongoose.connection;
@@ -61,27 +61,29 @@ getTracks('https://open.spotify.com/playlist/37i9dQZF1DXb7MJRXLczzR')
         trHits90.push(song)});
     })
 
- app.get('/songTr' ,(req, res) => {
+ app.get('/server/songTr' ,(req, res) => {
         res.send(trHits);
     });
-app.get('/songGlobal' ,(req, res) => {
+app.get('/server/songGlobal' ,(req, res) => {
         res.send(globalHits);
     });
- app.get('/songTr90' ,(req, res) => {
+ app.get('/server/songTr90' ,(req, res) => {
         res.send(trHits90);
     });
-app.get('/songGlobal20' ,(req, res) => {
+app.get('/server/songGlobal20' ,(req, res) => {
         res.send(globalHits20);
     });
 
-app.post("/addPoint", async(req, res) => {
+app.post("/server/addPoint", async(req, res) => {
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const {name,point,mongooseType} =req.body;
     const newPoint = new Point({name,point,mongooseType});
     const userDoc = await newPoint.save();
     res.send(userDoc);
 })
 
-app.get("/getPoint",async (req, res) =>{
+app.get("/server/getPoint",async (req, res) =>{
+    mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const points = await Point.find();
   res.send(points)
 })
