@@ -14,7 +14,7 @@ export default function Type() {
         }
     }, [songType, navigate]);
     useEffect(() => {
-        axios.get('http://127.0.0.1:5000/api/songTr')
+        axios.get('https://findthesong.vercel.app/api/songTr')
           .then(response => {
             setSongTr(response.data);
             console.log(songTr)
@@ -23,14 +23,14 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('http://127.0.0.1:5000/api/songGlobal')
+        axios.get('https://findthesong.vercel.app/api/songGlobal')
           .then(response => {
             setSongGlobal(response.data);
           })
           .catch(error => {
             console.error('Hata:', error);
           });
-        axios.get('http://127.0.0.1:5000/api/songTr90')
+        axios.get('https://findthesong.vercel.app/api/songTr90')
           .then(response => {
             setSongTr90(response.data);
             console.log(songTr)
@@ -39,7 +39,7 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('http://127.0.0.1:5000/api/songGlobal20')
+        axios.get('https://findthesong.vercel.app/api/songGlobal20')
           .then(response => {
             setSongGlobal20(response.data);
           })
