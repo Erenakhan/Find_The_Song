@@ -21,14 +21,14 @@ export default function Type() {
       
     const fetchData = async () => {
       try {
-          const response = await axios.get("https://findthesong.vercel.app/api/getPoint");
+          const response = await axios.get("https://find-song-backend.onrender.com/getPoint");
           setData(response.data);
       } catch (error) {
           console.error("Error:", error);
       }
   };
 
-        axios.get('https://findthesong.vercel.app/api/songTr')
+        axios.get('https://find-song-backend.onrender.com/songTr')
           .then(response => {
             setSongTr(response.data);
             console.log(songTr)
@@ -37,14 +37,14 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('https://findthesong.vercel.app/api/songGlobal')
+        axios.get('https://find-song-backend.onrender.com/songGlobal')
           .then(response => {
             setSongGlobal(response.data);
           })
           .catch(error => {
             console.error('Hata:', error);
           });
-        axios.get('https://findthesong.vercel.app/api/songTr90')
+        axios.get('https://find-song-backend.onrender.com/songTr90')
           .then(response => {
             setSongTr90(response.data);
             console.log(songTr)
@@ -53,7 +53,7 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('https://findthesong.vercel.app/api/songGlobal20')
+        axios.get('https://find-song-backend.onrender.com/songGlobal20')
           .then(response => {
             setSongGlobal20(response.data);
           })

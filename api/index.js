@@ -59,20 +59,20 @@ getTracks('https://open.spotify.com/playlist/37i9dQZF1DXb7MJRXLczzR')
         trHits90.push(song)});
     })
 
- app.get('/api/songTr' ,(req, res) => {
+ app.get('/songTr' ,(req, res) => {
         res.send(trHits);
     });
-app.get('/api/songGlobal' ,(req, res) => {
+app.get('/songGlobal' ,(req, res) => {
         res.send(globalHits);
     });
- app.get('/api/songTr90' ,(req, res) => {
+ app.get('/songTr90' ,(req, res) => {
         res.send(trHits90);
     });
-app.get('/api/songGlobal20' ,(req, res) => {
+app.get('/songGlobal20' ,(req, res) => {
         res.send(globalHits20);
     });
 
-app.post("/api/addPoint", async(req, res) => {
+app.post("/addPoint", async(req, res) => {
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const {name,point,mongooseType} =req.body;
     const newPoint = new Point({name,point,mongooseType});
@@ -80,7 +80,7 @@ app.post("/api/addPoint", async(req, res) => {
     res.send(userDoc);
 })
 
-app.get("/api/getPoint",async (req, res) =>{
+app.get("/getPoint",async (req, res) =>{
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const points = await Point.find();
   res.send(points)

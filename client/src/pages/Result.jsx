@@ -13,8 +13,8 @@ export default function Result() {
 
     const fetchData = async () => {
         try {
-            await axios.post("https://findthesong.vercel.app/api/addPoint", { name, mongooseType, point });
-            const response = await axios.get("https://findthesong.vercel.app/api/getPoint");
+            await axios.post("https://find-song-backend.onrender.com/addPoint", { name, mongooseType, point });
+            const response = await axios.get("https://find-song-backend.onrender.com/getPoint");
             setData(response.data);
         } catch (error) {
             console.error("Error:", error);
