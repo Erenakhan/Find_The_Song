@@ -17,6 +17,17 @@ export default function Type() {
     }, [songType, mongooseType]);
     
     useEffect(() => {
+
+      
+    const fetchData = async () => {
+      try {
+          const response = await axios.get("https://findthesong.vercel.app/api/getPoint");
+          setData(response.data);
+      } catch (error) {
+          console.error("Error:", error);
+      }
+  };
+
         axios.get('https://findthesong.vercel.app/api/songTr')
           .then(response => {
             setSongTr(response.data);
