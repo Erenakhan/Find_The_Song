@@ -11,7 +11,6 @@ export default function Result() {
 
     const navigate = useNavigate();
 
-
     const fetchData = async () => {
         try {
             await axios.post("https://findthesong.vercel.app/api/addPoint", { name, mongooseType, point });

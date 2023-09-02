@@ -88,9 +88,9 @@ app.get("/api/getPoint",async (req, res) =>{
 
 
 app.get('/', (req, res) => {
-    res.send(`Server is running on port ${port}`)
+    res.send(`Server is running on  ${port}`)
 });
 
 app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+    console.log(`Server is listening on  ${port}`);
 });
