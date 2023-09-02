@@ -14,6 +14,7 @@ const Point = require('./models/point.js');
 const port = 5000;
 const app = express();
 
+
 const corsOptions = {
     origin: ['http://127.0.0.1:5173', 'https://findthesong.vercel.app'],
     credentials: true,
@@ -38,10 +39,12 @@ const lists = {
     trHits90:[],
 };
 
-getTracks('https://open.spotify.com/playlist/37i9dQZF1DX0FGW2dUyDef').then(list => {  
+getTracks('https://open.spotify.com/playlist/37i9dQZF1DX9ASuQophyb3')
+.then(list => {  
     list.forEach(song => {
         trHits.push(song)});
 })
+
 getTracks('https://open.spotify.com/playlist/37i9dQZF1DX0kbJZpiYdZl')
 .then(list => {
     list.forEach(song => {

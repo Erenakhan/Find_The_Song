@@ -7,44 +7,42 @@ export default function Type() {
     const { name ,songType,setSongType,songTr,setSongTr,songGlobal,setSongGlobal,setMongooseType,mongooseType,songTr90,setSongTr90,songGlobal20,setSongGlobal20} = useContext(UserContext);
     const navigate = useNavigate();
 
-    
-
 
     useEffect(() => {
       if (songType&&mongooseType) {
         navigate('/game');
       }
     }, [songType, mongooseType]);
-    
+  
     useEffect(() => {
-
-      
-    const fetchData = async () => {
-      try {
-          const response = await axios.get("https://find-song-backend.onrender.com/getPoint");
-          setData(response.data);
-      } catch (error) {
-          console.error("Error:", error);
-      }
-  };
+      if (songType === songTr ) {
 
         axios.get('https://find-song-backend.onrender.com/songTr')
-          .then(response => {
-            setSongTr(response.data);
-            console.log(songTr)
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
-    
-        axios.get('https://find-song-backend.onrender.com/songGlobal')
+        .then(response => {
+          setSongTr(response.data);
+          console.log(songTr)
+        })
+        .catch(error => {
+          console.error('Hata:', error);
+        });
+
+      }
+       
+    else if (songType === songGlobal){
+
+      axios.get('https://find-song-backend.onrender.com/songGlobal')
           .then(response => {
             setSongGlobal(response.data);
           })
           .catch(error => {
             console.error('Hata:', error);
           });
-        axios.get('https://find-song-backend.onrender.com/songTr90')
+
+    }
+        
+    else if (songType === songTr90) {
+
+      axios.get('https://find-song-backend.onrender.com/songTr90')
           .then(response => {
             setSongTr90(response.data);
             console.log(songTr)
@@ -53,14 +51,23 @@ export default function Type() {
             console.error('Hata:', error);
           });
     
-        axios.get('https://find-song-backend.onrender.com/songGlobal20')
-          .then(response => {
-            setSongGlobal20(response.data);
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
+    }
+
+    else if (songType === songGlobal20) {
+
+      axios.get('https://find-song-backend.onrender.com/songGlobal20')
+      .then(response => {
+        setSongGlobal20(response.data);
+      })
+      .catch(error => {
+        console.error('Hata:', error);
+      });
+
+    }
+    else { }
       }, [songType]); 
+
+
 
       const handleButtonClickGl = () => {
         setSongType(songGlobal);
@@ -77,9 +84,11 @@ export default function Type() {
       const handleButtonClickTr90 = () => {
         setSongType(songTr90);
         setMongooseType("90's Hot Hits Turkey");
+
       };
- 
- 
+
+
+
     return (
         <div className='w-screen h-screen flex flex-col justify-center bg-gradient-to-tr from-gray-800 via-gray-600 to-green-800 '>
             <h1 className='text-center w-full flex justify-center text-3xl md:text-5xl font-semibold text-white'>Select your music type {name}</h1>
