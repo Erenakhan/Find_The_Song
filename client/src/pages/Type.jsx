@@ -8,7 +8,7 @@ export default function Type() {
     const navigate = useNavigate();
 
 
-    useEffect(() => {
+   
       const fetchData = async () => {
         try {
           if (songType && mongooseType) {
@@ -32,9 +32,7 @@ export default function Type() {
           console.error('Hata:', error);
         }
       };
-    
-      fetchData();
-    }, [songType]);
+
     
       const handleButtonClickGl = () => {
         setSongType(songGlobal);
