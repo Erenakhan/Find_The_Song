@@ -7,14 +7,15 @@ export default function Type() {
     const { name ,songType,setSongType,songTr,setSongTr,songGlobal,setSongGlobal,setMongooseType,mongooseType,songTr90,setSongTr90,songGlobal20,setSongGlobal20} = useContext(UserContext);
     const navigate = useNavigate();
 
-    if (songType&&mongooseType) {
-      navigate('/game');
-  }
+    
 
 
     useEffect(() => {
-       
-    }, [songType, navigate]);
+      if (songType&&mongooseType) {
+        navigate('/game');
+      }
+    }, [songType, mongooseType]);
+    
     useEffect(() => {
         axios.get('https://findthesong.vercel.app/api/songTr')
           .then(response => {
