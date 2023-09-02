@@ -34,8 +34,11 @@ export default function Result() {
 
     
     const start = ()=>{
+      setSongType()
+      setMongooseType("");
+      setPoint(0)
       setStartGame(true);
-  }
+  } 
 
     useEffect(() => {
       if (startGame) {
