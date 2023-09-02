@@ -9,45 +9,33 @@ export default function Type() {
 
 
     useEffect(() => {
-        if (songType&&mongooseType) {
+      const fetchData = async () => {
+        try {
+          if (songType && mongooseType) {
             navigate('/game');
+          }
+    
+          const songTrResponse = await axios.get('https://findthesong.vercel.app/api/songTr');
+          setSongTr(songTrResponse.data);
+          console.log(songTr);
+    
+          const songGlobalResponse = await axios.get('https://findthesong.vercel.app/api/songGlobal');
+          setSongGlobal(songGlobalResponse.data);
+    
+          const songTr90Response = await axios.get('https://findthesong.vercel.app/api/songTr90');
+          setSongTr90(songTr90Response.data);
+          console.log(songTr90);
+    
+          const songGlobal20Response = await axios.get('https://findthesong.vercel.app/api/songGlobal20');
+          setSongGlobal20(songGlobal20Response.data);
+        } catch (error) {
+          console.error('Hata:', error);
         }
-    }, [songType, navigate]);
-    useEffect(() => {
-        axios.get('https://findthesong.vercel.app/api/songTr')
-          .then(response => {
-            setSongTr(response.data);
-            console.log(songTr)
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
+      };
     
-        axios.get('https://findthesong.vercel.app/api/songGlobal')
-          .then(response => {
-            setSongGlobal(response.data);
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
-        axios.get('https://findthesong.vercel.app/api/songTr90')
-          .then(response => {
-            setSongTr90(response.data);
-            console.log(songTr)
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
+      fetchData();
+    }, [songType]);
     
-        axios.get('https://findthesong.vercel.app/api/songGlobal20')
-          .then(response => {
-            setSongGlobal20(response.data);
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
-      }, [songType]); 
-
       const handleButtonClickGl = () => {
         setSongType(songGlobal);
         setMongooseType("Hot Hits Global");
