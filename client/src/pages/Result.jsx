@@ -65,7 +65,7 @@ export default function Result() {
             </div>
             <div className='md:w-1/2 mr-0 flex flex-col justify-center items-center'>
                 <h2 className='text-xl  md:text-5xl font-semibold font-mono text-yellow-300 pt-8 pb-2  md:p-5  md:pt-0 '>Best of 5 User</h2>
-                    <table className='shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] table-auto bg-gradient-to-r from-gray-800 to-gray-500   '>
+                    <table className='shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] table-auto bg-gradient-to-r from-gray-800 to-gray-500  rounded-md md:p-6 p-4 '>
                       <thead>
                           <tr  className='border-b-2'>
                               <th className=' text-lg md:text-4xl text-gray-100 p-1 md:p-5'>User</th>
