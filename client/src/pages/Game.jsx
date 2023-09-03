@@ -22,7 +22,7 @@ export default function Game() {
 
   const {songType,point,setPoint,name,mongooseType} = useContext(UserContext);
 
-  const playRandomSong = () => {  
+  const playRandomSong = () => {
     if (!songType) {
       navigate('/type');
       return;
@@ -31,49 +31,57 @@ export default function Game() {
       navigate('/');
       return;
     }
-    setPlayedSong(prevPlayedSong => [...prevPlayedSong, randomIndex]);
   
-
     let randomIndex = getRandomNumber(songType.length);
     if (playedSong.includes(randomIndex)) {
       let newIndex = randomIndex;
-      while (playedSong.includes(newIndex)) {
-          newIndex = getRandomNumber(songType.length);
+      let maxTries = 100; // Maksimum deneme sayısı
+      while (playedSong.includes(newIndex) && maxTries > 0) {
+        newIndex = getRandomNumber(songType.length);
+        maxTries--;
       }
-  
+      if (maxTries === 0) {
+        console.error("Maksimum deneme sayısına ulaşıldı, benzersiz indeks bulunamadı.");
+        return;
+      }
       randomIndex = newIndex;
-  }
+    }
+  
     let randomIndex2 = getRandomNumber(songType.length);
     let randomIndex3 = getRandomNumber(songType.length);
-    let randomIndex4 = getRandomNumber(songType.length); 
-      // Generate unique random indexes for randomIndex2, randomIndex3, and randomIndex4
+    let randomIndex4 = getRandomNumber(songType.length);
+  
+    // Benzersiz rastgele indeksler oluşturun
     do {
       randomIndex2 = getRandomNumber(songType.length);
     } while (randomIndex2 === randomIndex);
-    
+  
     do {
       randomIndex3 = getRandomNumber(songType.length);
     } while (randomIndex3 === randomIndex || randomIndex3 === randomIndex2);
-    
+  
     do {
       randomIndex4 = getRandomNumber(songType.length);
-    } while (randomIndex4 === randomIndex || randomIndex4 === randomIndex2 || randomIndex4 === randomIndex3);
-
+    } while (
+      randomIndex4 === randomIndex ||
+      randomIndex4 === randomIndex2 ||
+      randomIndex4 === randomIndex3
+    );
+  
     const newSong2 = songType[randomIndex2];
     const newSong3 = songType[randomIndex3];
     const newSong4 = songType[randomIndex4];
-
+  
     playAudio(songType[randomIndex].previewUrl);
     setCurrentSong(songType[randomIndex]);
-
-
+  
     const updatedMixedSong = [
       songType[randomIndex],
       newSong2,
       newSong3,
       newSong4,
     ];
-
+  
     const shuffleArray = (array) => {
       const copyArray = [...array];
       for (let i = copyArray.length - 1; i > 0; i--) {
@@ -83,10 +91,10 @@ export default function Game() {
       return copyArray;
     };
     const shuffledArray = shuffleArray(updatedMixedSong);
-    setMixedSong(shuffledArray); 
+    setMixedSong(shuffledArray);
   };
-
-   const playAudio = (source) => {
+  
+  const playAudio = (source) => {
     if (isPlaying) {
       audioPlayer.pause();
       setSongReady(false);
@@ -95,16 +103,17 @@ export default function Game() {
       setSongReady(true);
       audioPlayer.play();
       setIsPlaying(true);
-      setCurrentSong(source)
+      setCurrentSong(source);
     } else {
       audioPlayer.src = source;
       setSongReady(true);
       audioPlayer.play();
       setIsPlaying(true);
       setAudioSource(source);
-      setCurrentSong(source)
+      setCurrentSong(source);
     }
   };
+  
  
   useEffect(() => {
     if (isPlaying) {
