@@ -17,7 +17,6 @@ export default function Index() {
             return () => clearTimeout(redirectTimeout);
         }
     }, [direction, navigate]);
-    console.log(mongooseType)
 
     const handleStartClick = () => {
         setDirection(true);

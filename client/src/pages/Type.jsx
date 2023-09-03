@@ -14,61 +14,71 @@ export default function Type() {
       }
     }, [songType, mongooseType]);
   
-    useEffect(() => {
-      if (songType === songTr ) {
-
-        axios.get('https://find-song-backend.onrender.com/songTr')
+  useEffect(() => {
+    // Check if songType matches songTr
+    if (songType === songTr) {
+      axios.get('https://find-song-backend.onrender.com/songTr')
         .then(response => {
+          // Update the state with the fetched data
           setSongTr(response.data);
-          console.log(songTr)
+          setSongType(response.data)
         })
         .catch(error => {
-          console.error('Hata:', error);
+          // Handle and log any errors that occur during the request
+          console.error('Error fetching songTr:', error);
         });
+    }
+  }, [songType, songTr]);
 
-      }
-       
-    else if (songType === songGlobal){
-
+  useEffect(() => {
+    // Check if songType matches songGlobal
+    if (songType === songGlobal) {
       axios.get('https://find-song-backend.onrender.com/songGlobal')
-          .then(response => {
-            setSongGlobal(response.data);
-          })
-          .catch(error => {
-            console.error('Hata:', error);
-          });
-
+        .then(response => {
+          // Update the state with the fetched data
+          setSongGlobal(response.data);
+          setSongType(response.data)
+        })
+        .catch(error => {
+          // Handle and log any errors that occur during the request
+          console.error('Error fetching songGlobal:', error);
+        });
     }
-        
-    else if (songType === songTr90) {
+  }, [songType, songGlobal]);
 
-      axios.get('https://find-song-backend.onrender.com/songTr90')
+    useEffect(() => {
+      // Check if songType matches songTr90
+      if (songType === songTr90) {
+        axios.get('https://find-song-backend.onrender.com/songTr90')
           .then(response => {
+            // Update the state with the fetched data
             setSongTr90(response.data);
-            console.log(songTr)
+            setSongType(response.data)
           })
           .catch(error => {
-            console.error('Hata:', error);
+            // Handle and log any errors that occur during the request
+            console.error('Error fetching songTr90:', error);
           });
+      }
+    }, [songType, songTr90]);
+
+
+    useEffect(() => {
+      // Check if songType matches songGlobal20
+      if (songType === songGlobal20) {
+        axios.get('https://find-song-backend.onrender.com/songGlobal20')
+          .then(response => {
+            // Update the state with the fetched data
+            setSongGlobal20(response.data);
+            setSongType(response.data)
+          })
+          .catch(error => {
+            // Handle and log any errors that occur during the request
+            console.error('Error fetching songGlobal20:', error);
+          });
+      }
+    }, [songType, songGlobal20]);
     
-    }
-
-    else if (songType === songGlobal20) {
-
-      axios.get('https://find-song-backend.onrender.com/songGlobal20')
-      .then(response => {
-        setSongGlobal20(response.data);
-      })
-      .catch(error => {
-        console.error('Hata:', error);
-      });
-
-    }
-    else { }
-      }, [songType]); 
-
-
-
       const handleButtonClickGl = () => {
         setSongType(songGlobal);
         setMongooseType("Hot Hits Global");
@@ -86,8 +96,6 @@ export default function Type() {
         setMongooseType("90's Hot Hits Turkey");
 
       };
-
-
 
     return (
         <div className='w-screen h-screen flex flex-col justify-center bg-gradient-to-tr from-gray-800 via-gray-600 to-green-800 '>

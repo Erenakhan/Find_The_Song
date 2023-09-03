@@ -17,12 +17,10 @@ export default function Game() {
   const [selected,setSelected]=useState();
   const [target,setTarget]=useState(false);
   const navigate = useNavigate();
-  const [b,setB]=useState();
-  const [c,setC]=useState();
-  const [d,setD]=useState();
 
 
-  const {songType,point,setPoint,name} = useContext(UserContext);
+
+  const {songType,point,setPoint,name,mongooseType} = useContext(UserContext);
 
   const playRandomSong = () => {  
     if (!songType) {
@@ -67,12 +65,8 @@ export default function Game() {
 
     playAudio(songType[randomIndex].previewUrl);
     setCurrentSong(songType[randomIndex]);
-    setB(newSong2);
-    setC(newSong3);
-    setD(newSong4);
 
 
-    console.log("Played songs",playedSong)
     const updatedMixedSong = [
       songType[randomIndex],
       newSong2,
@@ -90,10 +84,6 @@ export default function Game() {
     };
     const shuffledArray = shuffleArray(updatedMixedSong);
     setMixedSong(shuffledArray); 
-    console.log(randomIndex);
-    console.log(newSong2);
-    console.log(newSong3);
-    console.log(newSong4);
   };
 
    const playAudio = (source) => {
@@ -147,8 +137,6 @@ export default function Game() {
     if (song === currentSong) {
       setSelected(song)
       setTarget(true);
-      console.log(selected)
-      console.log(song === currentSong)
       setPoint(point + trueCurrentPoint ); 
     } else {
       setTarget(true);
@@ -215,7 +203,7 @@ export default function Game() {
 
         <div>
         <button className="shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] p-4 text-4xl border-black border-2 w-[200px] text-white bg-transparent opacity-60 px-4 py-2 hover:opacity-100 mx-auto rounded-md" 
-      onClick={() => playRandomSong()}>Başla</button>
+      onClick={() => playRandomSong()}>Start</button>
         </div>
         
         </div>} 

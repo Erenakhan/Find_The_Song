@@ -6,6 +6,7 @@ const spotify = require('spotify-url-info');
 const bodyParser = require('body-parser');
 const Preview = spotify.Preview;
 const { getData, getPreview, getTracks, getDetails } = spotify(fetch);
+var SpotifyWebApi = require('spotify-web-api-node');
 
 const uri = "mongodb+srv://erenakhan:erenakhan123@cluster0.nkwtsfn.mongodb.net/?retryWrites=true&w=majority"
 
@@ -38,6 +39,8 @@ const lists = {
     globalHits20 :[],
     trHits90:[],
 };
+
+
 
 getTracks('https://open.spotify.com/playlist/37i9dQZF1DX9ASuQophyb3')
 .then(list => {  

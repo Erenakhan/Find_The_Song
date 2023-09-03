@@ -13,8 +13,8 @@ export default function Result() {
 
     const fetchData = async () => {
         try {
-            await axios.post("https://find-song-backend.onrender.com/addPoint", { name, mongooseType, point });
-            const response = await axios.get("https://find-song-backend.onrender.com/getPoint");
+            await axios.post("http://localhost:5000/addPoint", { name, mongooseType, point });
+            const response = await axios.get("http://localhost:5000/getPoint");
             setData(response.data);
         } catch (error) {
             console.error("Error:", error);
