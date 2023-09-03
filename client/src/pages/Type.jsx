@@ -13,89 +13,69 @@ export default function Type() {
         navigate('/game');
       }
     }, [songType, mongooseType]);
-  
-  useEffect(() => {
-    // Check if songType matches songTr
-    if (songType === songTr) {
-      axios.get('https://find-song-backend.onrender.com/songTr')
-        .then(response => {
-          // Update the state with the fetched data
-          setSongTr(response.data);
-          setSongType(response.data)
-        })
-        .catch(error => {
-          // Handle and log any errors that occur during the request
-          console.error('Error fetching songTr:', error);
-        });
-    }
-  }, [songType, songTr]);
-
-  useEffect(() => {
-    // Check if songType matches songGlobal
-    if (songType === songGlobal) {
-      axios.get('https://find-song-backend.onrender.com/songGlobal')
-        .then(response => {
-          // Update the state with the fetched data
-          setSongGlobal(response.data);
-          setSongType(response.data)
-        })
-        .catch(error => {
-          // Handle and log any errors that occur during the request
-          console.error('Error fetching songGlobal:', error);
-        });
-    }
-  }, [songType, songGlobal]);
-
-    useEffect(() => {
-      // Check if songType matches songTr90
-      if (songType === songTr90) {
-        axios.get('https://find-song-backend.onrender.com/songTr90')
-          .then(response => {
-            // Update the state with the fetched data
-            setSongTr90(response.data);
-            setSongType(response.data)
-          })
-          .catch(error => {
-            // Handle and log any errors that occur during the request
-            console.error('Error fetching songTr90:', error);
-          });
-      }
-    }, [songType, songTr90]);
-
-
-    useEffect(() => {
-      // Check if songType matches songGlobal20
-      if (songType === songGlobal20) {
-        axios.get('https://find-song-backend.onrender.com/songGlobal20')
-          .then(response => {
-            // Update the state with the fetched data
-            setSongGlobal20(response.data);
-            setSongType(response.data)
-          })
-          .catch(error => {
-            // Handle and log any errors that occur during the request
-            console.error('Error fetching songGlobal20:', error);
-          });
-      }
-    }, [songType, songGlobal20]);
     
-      const handleButtonClickGl = () => {
-        setSongType(songGlobal);
-        setMongooseType("Hot Hits Global");
-      };
-      const handleButtonClickTr = () => {
-        setSongType(songTr);
-        setMongooseType("Hot Hits Turkey");
-      };
-      const handleButtonClickGl20 = () => {
-        setSongType(songGlobal20);
-        setMongooseType("20's Hot Hits Global");
-      };
-      const handleButtonClickTr90 = () => {
-        setSongType(songTr90);
-        setMongooseType("90's Hot Hits Turkey");
+    // İsteği yapacak genel bir işlev oluşturun
+const fetchData = async (url, setData, setType, errorType) => {
+  try {
+    const response = await axios.get(url);
+    // Update the state with the fetched data
+    setData(response.data);
+    setType(response.data);
+  } catch (error) {
+    // Handle and log any errors that occur during the request
+    console.error(`Error fetching ${errorType}:`, error);
+  }
+};
 
-      };
+// useEffect içinde fetchData işlevini kullanın
+useEffect(() => {
+  if (songType === songTr) {
+    fetchData('https://find-song-backend.onrender.com/songTr', setSongTr, setSongType, 'songTr');
+  }
+}, [songType, songTr]);
+
+useEffect(() => {
+  if (songType === songGlobal) {
+    fetchData('https://find-song-backend.onrender.com/songGlobal', setSongGlobal, setSongType, 'songGlobal');
+  }
+}, [songType, songGlobal]);
+
+useEffect(() => {
+  if (songType === songTr90) {
+    fetchData('https://find-song-backend.onrender.com/songTr90', setSongTr90, setSongType, 'songTr90');
+  }
+}, [songType, songTr90]);
+
+useEffect(() => {
+  if (songType === songGlobal20) {
+    fetchData('https://find-song-backend.onrender.com/songGlobal20', setSongGlobal20, setSongType, 'songGlobal20');
+  }
+}, [songType, songGlobal20]);
+
+// Düğme işlevlerini kullanarak songType'ı ve mongooseType'ı ayarlayabilirsiniz
+const handleButtonClick = (type, mongooseType) => {
+  setSongType(type);
+  setMongooseType(mongooseType);
+};
+
+// Örnek düğme işlevlerini kullanma
+const handleButtonClickGl = () => {
+  handleButtonClick(songGlobal, "Hot Hits Global");
+};
+
+const handleButtonClickTr = () => {
+  handleButtonClick(songTr, "Hot Hits Turkey");
+};
+
+const handleButtonClickGl20 = () => {
+  handleButtonClick(songGlobal20, "20's Hot Hits Global");
+};
+
+const handleButtonClickTr90 = () => {
+  handleButtonClick(songTr90, "90's Hot Hits Turkey");
+};
+
+ 
 
     return (
         <div className='w-screen h-screen flex flex-col justify-center bg-gradient-to-tr from-gray-800 via-gray-600 to-green-800 '>
