@@ -55,7 +55,7 @@ export default function Type() {
 // useEffect içinde fetchData işlevini kullanın
 useEffect(() => {
   if (songType === songTr) {
-    fetchData('https://find-song-backend.onrender.com/songTr', setSongTr, setSongType, 'songTr');
+    fetchData('http://localhost:5000/songTr', setSongTr, setSongType, 'songTr');
   }
 }, [songType, songTr]);
 
