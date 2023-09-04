@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contex';
 import axios from 'axios';
 
+
 export default function Type() {
     const { name ,songType,setSongType,songTr,setSongTr,songGlobal,setSongGlobal,setMongooseType,mongooseType,songTr90,setSongTr90,songGlobal20,setSongGlobal20,setShowingButton} = useContext(UserContext);
     const navigate = useNavigate();
@@ -31,16 +32,13 @@ export default function Type() {
         setShowingButton(true);
       } catch (error) {
         if (axios.isCancel(error)) {
-          // İstek iptal edildiğinde buraya düşer
+          setType();
+          setData();
+          navigate('/');
           console.log('API isteği iptal edildi:', error.message);
         } else {
-          // Diğer hataları işle
           console.error(`Error fetching ${errorType}:`, error);
-    
-          // Kullanıcıya bir hata mesajı gösterebilirsiniz
-    
-          // Veri alımı başarısız olduysa ana sayfaya yönlendirin
-          navigate('/'); // "/anasayfa" yerine uygun sayfa yolunu belirtin
+          navigate('/');
         }
       }
     
@@ -55,7 +53,7 @@ export default function Type() {
 // useEffect içinde fetchData işlevini kullanın
 useEffect(() => {
   if (songType === songTr) {
-    fetchData('http://localhost:5000/songTr', setSongTr, setSongType, 'songTr');
+    fetchData('https://find-song-backend.onrender.com/songTr', setSongTr, setSongType, 'songTr');
   }
 }, [songType, songTr]);
 
