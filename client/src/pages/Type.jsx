@@ -17,37 +17,40 @@ export default function Type() {
     
     // İsteği yapacak genel bir işlev oluşturun
 
-    const fetchData = async (url, setData, setType, errorType, timeoutDuration = 1500) => {
-      const source = axios.CancelToken.source();
-    
-      try {
-        // API isteği gönderme ve isteği iptal etme yeteneği ekleyerek yapılıyor
-        const response = await axios.get(url, {
-          cancelToken: source.token,
-        });
-    
-        // Veriyi güncelle
-        setData(response.data);
-        setType(response.data);
-        setShowingButton(true);
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          setType();
-          setData();
-          navigate('/');
-          console.log('API isteği iptal edildi:', error.message);
-        } else {
-          console.error(`Error fetching ${errorType}:`, error);
-          navigate('/');
-        }
-      }
-    
-      // Zaman aşımını belirli bir süre sonra iptal etmek için
-      setTimeout(() => {
-        source.cancel('Zaman aşımı: İstek çok uzun sürdü.');
-      }, timeoutDuration);
-    };
-    
+    const fetchData = async (url, setData, setType, errorType, timeoutDuration = 2000) => {
+  const source = axios.CancelToken.source();
+
+  // İstek zaman aşımını yönetmek için bir zamanlayıcı ayarla
+  const timeout = setTimeout(() => {
+    source.cancel('API isteği zaman aşımına uğradı');
+  }, timeoutDuration);
+
+  try {
+    // API isteği gönderme ve isteği iptal etme yeteneği ekleyerek yapılıyor
+    const response = await axios.get(url, {
+      cancelToken: source.token,
+    });
+
+    // Zaman aşımı zamanlayıcısını temizle
+    clearTimeout(timeout);
+
+    // Veriyi güncelle
+    setData(response.data);
+    setType(response.data);
+    setShowingButton(true);
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      setType();
+      setData();
+      navigate('/');
+      console.log('API isteği iptal edildi:', error.message);
+    } else {
+      console.error(`Error fetching ${errorType}:`, error);
+      navigate('/');
+    }
+  }
+}
+
     
     
 // useEffect içinde fetchData işlevini kullanın
