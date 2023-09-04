@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Result() {
-    const { name, setMongooseType , mongooseType, point ,setPoint,songType,setSongType} = useContext(UserContext);
+    const { name, setMongooseType , mongooseType, point ,setPoint,songType,setSongType,setShowingButton} = useContext(UserContext);
     const [data, setData] = useState([]);
     const [fetched, setFetched] = useState(false);
     const [startGame, setStartGame] = useState(false);
@@ -38,6 +38,7 @@ export default function Result() {
       setMongooseType("");
       setPoint(0)
       setStartGame(true);
+      setShowingButton(false);
   } 
 
     useEffect(() => {

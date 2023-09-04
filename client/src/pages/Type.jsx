@@ -4,7 +4,7 @@ import { UserContext } from '../contex';
 import axios from 'axios';
 
 export default function Type() {
-    const { name ,songType,setSongType,songTr,setSongTr,songGlobal,setSongGlobal,setMongooseType,mongooseType,songTr90,setSongTr90,songGlobal20,setSongGlobal20} = useContext(UserContext);
+    const { name ,songType,setSongType,songTr,setSongTr,songGlobal,setSongGlobal,setMongooseType,mongooseType,songTr90,setSongTr90,songGlobal20,setSongGlobal20,setShowingButton} = useContext(UserContext);
     const navigate = useNavigate();
 
 
@@ -15,18 +15,43 @@ export default function Type() {
     }, [songType, mongooseType]);
     
     // İsteği yapacak genel bir işlev oluşturun
-const fetchData = async (url, setData, setType, errorType) => {
-  try {
-    const response = await axios.get(url);
-    // Update the state with the fetched data
-    setData(response.data);
-    setType(response.data);
-  } catch (error) {
-    // Handle and log any errors that occur during the request
-    console.error(`Error fetching ${errorType}:`, error);
-  }
-};
 
+    const fetchData = async (url, setData, setType, errorType, timeoutDuration = 1500) => {
+      const source = axios.CancelToken.source();
+    
+      try {
+        // API isteği gönderme ve isteği iptal etme yeteneği ekleyerek yapılıyor
+        const response = await axios.get(url, {
+          cancelToken: source.token,
+        });
+    
+        // Veriyi güncelle
+        setData(response.data);
+        setType(response.data);
+        setShowingButton(true);
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          // İstek iptal edildiğinde buraya düşer
+          console.log('API isteği iptal edildi:', error.message);
+        } else {
+          // Diğer hataları işle
+          console.error(`Error fetching ${errorType}:`, error);
+    
+          // Kullanıcıya bir hata mesajı gösterebilirsiniz
+    
+          // Veri alımı başarısız olduysa ana sayfaya yönlendirin
+          navigate('/'); // "/anasayfa" yerine uygun sayfa yolunu belirtin
+        }
+      }
+    
+      // Zaman aşımını belirli bir süre sonra iptal etmek için
+      setTimeout(() => {
+        source.cancel('Zaman aşımı: İstek çok uzun sürdü.');
+      }, timeoutDuration);
+    };
+    
+    
+    
 // useEffect içinde fetchData işlevini kullanın
 useEffect(() => {
   if (songType === songTr) {

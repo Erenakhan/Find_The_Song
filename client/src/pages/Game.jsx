@@ -16,21 +16,23 @@ export default function Game() {
   const [gameFinished,setGameFinised]=useState(false);
   const [selected,setSelected]=useState();
   const [target,setTarget]=useState(false);
+
   const navigate = useNavigate();
 
 
 
-  const {songType,point,setPoint,name,mongooseType} = useContext(UserContext);
+  const {songType,point,setPoint,name,mongooseType,showingButton} = useContext(UserContext);
 
-  const playRandomSong = () => {
-    if (!songType) {
-      navigate('/type');
-      return;
-    }
-    if (!name) {
+  useEffect(()=>{
+    if (!songType || !name) {
       navigate('/');
       return;
     }
+  },[])
+
+
+  const playRandomSong = () => {
+    
   
     let randomIndex = getRandomNumber(songType.length);
     if (playedSong.includes(randomIndex)) {
@@ -211,8 +213,10 @@ export default function Game() {
       </div>
 
         <div>
-        <button className="shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] p-4 text-4xl border-black border-2 w-[200px] text-white bg-transparent opacity-60 px-4 py-2 hover:opacity-100 mx-auto rounded-md" 
-      onClick={() => playRandomSong()}>Start</button>
+        {showingButton &&
+          <button className="shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] p-4 text-4xl border-black border-2 w-[200px] text-white bg-transparent opacity-60 px-4 py-2 hover:opacity-100 mx-auto rounded-md" 
+          onClick={() => playRandomSong()}>Start</button>
+        }
         </div>
         
         </div>} 
