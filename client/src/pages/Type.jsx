@@ -17,7 +17,7 @@ export default function Type() {
     
     // İsteği yapacak genel bir işlev oluşturun
 
-    const fetchData = async (url, setData, setType, errorType, timeoutDuration = 2000) => {
+    const fetchData = async (url, setData, setType, errorType, timeoutDuration = 5000) => {
   const source = axios.CancelToken.source();
 
   // İstek zaman aşımını yönetmek için bir zamanlayıcı ayarla
