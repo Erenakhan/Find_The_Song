@@ -1,11 +1,42 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../contex';
+import axios from 'axios';
 
 export default function Index() {
-    const { name, setName ,mongooseType} = useContext(UserContext); 
+    const { name, setName ,accessToken, setAccessToken} = useContext(UserContext); 
     const [direction, setDirection] = useState(false);
     const navigate = useNavigate();
+
+    const CLIENT_ID ="a63f424649704702a835a37e61a7b13c"
+    const CLIENT_SECRET="1bcce9dd426e4a978edbf4ed82c45524"
+
+useEffect(() => {
+// API Access Token
+var authParameters = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
+}
+
+fetch('https://accounts.spotify.com/api/token', authParameters)
+    .then(result => result.json())
+    .then(data => setAccessToken(data.access_token))
+    .catch(error => console.error('Error fetching token:', error)); // Add error handling
+}, []);
+
+useEffect(() => {
+    async function sendAccessToken() {
+        try {
+            await axios.post('http://localhost:5000/acsessToken', { accessToken });
+        } catch (error) {
+            console.error('Error sending access token:', error);
+        }
+    }
+    sendAccessToken();
+}, [accessToken]);
 
     useEffect(() => {
        if (direction && name) {
@@ -21,6 +52,8 @@ export default function Index() {
     const handleStartClick = () => {
         setDirection(true);
     };
+
+    
 
     return (
         <div className='w-screen h-screen flex flex-col justify-center bg-gradient-to-tr from-gray-800 via-gray-600 to-green-800 '>

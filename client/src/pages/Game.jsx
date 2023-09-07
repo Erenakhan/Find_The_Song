@@ -19,8 +19,6 @@ export default function Game() {
 
   const navigate = useNavigate();
 
-
-
   const {songType,point,setPoint,name,mongooseType,showingButton} = useContext(UserContext);
 
   useEffect(()=>{
@@ -30,71 +28,67 @@ export default function Game() {
     }
   },[])
 
-
   const playRandomSong = () => {
-    
+    try {
+      let randomIndex;
+      do {
+        randomIndex = getRandomNumber(songType.items.length);
+      } while (
+        playedSong.includes(randomIndex) ||
+        !songType.items[randomIndex].track.preview_url
+      );
   
-    let randomIndex = getRandomNumber(songType.length);
-    if (playedSong.includes(randomIndex)) {
-      let newIndex = randomIndex;
-      let maxTries = 100; // Maksimum deneme sayısı
-      while (playedSong.includes(newIndex) && maxTries > 0) {
-        newIndex = getRandomNumber(songType.length);
-        maxTries--;
-      }
-      if (maxTries === 0) {
-        console.error("Maksimum deneme sayısına ulaşıldı, benzersiz indeks bulunamadı.");
-        return;
-      }
-      randomIndex = newIndex;
+      setPlayedSong((prevPlayedSong) => [...prevPlayedSong, randomIndex]);
+  
+      let randomIndex2 = getRandomNumber(songType.items.length);
+      let randomIndex3 = getRandomNumber(songType.items.length);
+      let randomIndex4 = getRandomNumber(songType.items.length);
+  
+      do {
+        randomIndex2 = getRandomNumber(songType.items.length);
+      } while (randomIndex2 === randomIndex);
+  
+      do {
+        randomIndex3 = getRandomNumber(songType.items.length);
+      } while (randomIndex3 === randomIndex || randomIndex3 === randomIndex2);
+  
+      do {
+        randomIndex4 = getRandomNumber(songType.items.length);
+      } while (
+        randomIndex4 === randomIndex ||
+        randomIndex4 === randomIndex2 ||
+        randomIndex4 === randomIndex3
+      );
+  
+      const newSong2 = songType.items[randomIndex2].track;
+      const newSong3 = songType.items[randomIndex3].track;
+      const newSong4 = songType.items[randomIndex4].track;
+  
+      playAudio(songType.items[randomIndex].track.preview_url);
+      setCurrentSong(songType.items[randomIndex].track);
+      const updatedMixedSong = [
+        songType.items[randomIndex].track,
+        newSong2,
+        newSong3,
+        newSong4,
+      ];
+  
+      const shuffleArray = (array) => {
+        const copyArray = [...array];
+        for (let i = copyArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copyArray[i], copyArray[j]] = [copyArray[j], copyArray[i]];
+        }
+        return copyArray;
+      };
+      const shuffledArray = shuffleArray(updatedMixedSong);
+      setMixedSong(shuffledArray);
+    } catch (error) {
+      console.error("Error in playRandomSong:", error);
     }
-  
-    let randomIndex2 = getRandomNumber(songType.length);
-    let randomIndex3 = getRandomNumber(songType.length);
-    let randomIndex4 = getRandomNumber(songType.length);
-  
-    // Benzersiz rastgele indeksler oluşturun
-    do {
-      randomIndex2 = getRandomNumber(songType.length);
-    } while (randomIndex2 === randomIndex);
-  
-    do {
-      randomIndex3 = getRandomNumber(songType.length);
-    } while (randomIndex3 === randomIndex || randomIndex3 === randomIndex2);
-  
-    do {
-      randomIndex4 = getRandomNumber(songType.length);
-    } while (
-      randomIndex4 === randomIndex ||
-      randomIndex4 === randomIndex2 ||
-      randomIndex4 === randomIndex3
-    );
-  
-    const newSong2 = songType[randomIndex2];
-    const newSong3 = songType[randomIndex3];
-    const newSong4 = songType[randomIndex4];
-  
-    playAudio(songType[randomIndex].previewUrl);
-    setCurrentSong(songType[randomIndex]);
-  
-    const updatedMixedSong = [
-      songType[randomIndex],
-      newSong2,
-      newSong3,
-      newSong4,
-    ];
-  
-    const shuffleArray = (array) => {
-      const copyArray = [...array];
-      for (let i = copyArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copyArray[i], copyArray[j]] = [copyArray[j], copyArray[i]];
-      }
-      return copyArray;
-    };
-    const shuffledArray = shuffleArray(updatedMixedSong);
-    setMixedSong(shuffledArray);
   };
+  
+  
   
   const playAudio = (source) => {
     if (isPlaying) {
@@ -115,7 +109,6 @@ export default function Game() {
       setCurrentSong(source);
     }
   };
-  
  
   useEffect(() => {
     if (isPlaying) {
@@ -154,7 +147,7 @@ export default function Game() {
       setSelected(song);
       setPoint(point - 50); 
     }
-    setCount(10);
+    setCount(60);
     setTimeout(() => {
       setSelected();
       setTarget(false);
@@ -171,7 +164,7 @@ export default function Game() {
       setCount(10);
       setPoint(point - 55);
     }
-  }, [count]);
+  }, [count], 1000);
 
   if (startCount < 0 ) {
     audioPlayer.pause();
@@ -195,7 +188,7 @@ export default function Game() {
         <div className="text-left mx-auto max-w-md">
           <h2 className="mb-2">
             <span className="text-xl md:text-4xl text-white font-semibold"></span>
-            Every song must be answered within 5 seconds.
+            Every song must be answered within 10 seconds.
           </h2>
           <h2 className="mb-2">
             <span className="text-xl md:text-4xl text-white font-semibold"> </span>
@@ -203,7 +196,7 @@ export default function Game() {
           </h2>
           <h2 className="mb-2">
             <span className="text-xl md:text-4xl text-white font-semibold"> </span>
-            You have a total of 40 seconds for the game.
+            You have a total of 60 seconds for the game.
           </h2>
           <h2 className="mb-2">
             <span className="text-xl md:text-4xl text-white font-semibold"> </span>
@@ -236,8 +229,10 @@ export default function Game() {
                   " "
                   }
                 `}>
-                {song.name ? song.name : "-"}{" "}
-                <span className="font-semibold">{song.artist || "-"}</span>
+                  <div className='flex gap-6  px-8'>
+                  < img className='object-cover  w-20 h-20 ' src={song.album.images[0].url} />
+                <span className="font-semibold h-20 w-full  flex items-center  justify-center overflow-y-auto"> {song.name ? song.name : "-"}{" "}</span>
+                  </div>
                 </div>
               ))}
             </div>

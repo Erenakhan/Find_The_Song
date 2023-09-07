@@ -3,10 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const fetch = require('isomorphic-unfetch');
 const spotify = require('spotify-url-info');
-const bodyParser = require('body-parser');
-const Preview = spotify.Preview;
-const { getData, getPreview, getTracks, getDetails } = spotify(fetch);
-var SpotifyWebApi = require('spotify-web-api-node');
+const { Preview,getData, getPreview, getTracks, getDetails } = spotify(fetch);
 
 const uri = "mongodb+srv://erenakhan:erenakhan123@cluster0.nkwtsfn.mongodb.net/?retryWrites=true&w=majority"
 
@@ -20,62 +17,88 @@ const corsOptions = {
     origin: ['http://127.0.0.1:5173', 'https://findthesong.vercel.app'],
     credentials: true,
   };
+  
 
 app.use(express.json())
-app.use(bodyParser.json())
 app.use(cors(corsOptions));
 
-const baseURL = "https://open.spotify.com/track/";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const trHits = [];
 const globalHits = [];
 const globalHits20 =[];
 const trHits90=[];
-
 const lists = {
     trHits: [],
     globalHits: [],
     globalHits20 :[],
     trHits90:[],
 };
+const list = []; 
 
+let globalAccsess = null;
 
-
-getTracks('https://open.spotify.com/playlist/37i9dQZF1DX9ASuQophyb3')
-.then(list => {  
-    list.forEach(song => {
-        trHits.push(song)});
-})
-
-getTracks('https://open.spotify.com/playlist/37i9dQZF1DX0kbJZpiYdZl')
-.then(list => {
-    list.forEach(song => {
-        globalHits.push(song)});
-    })
-
-getTracks('https://open.spotify.com/playlist/37i9dQZF1DX4o1oenSJRJd')
-.then(list => {
-    list.forEach(song => {
-        globalHits20.push(song)});
-    })
-getTracks('https://open.spotify.com/playlist/37i9dQZF1DXb7MJRXLczzR')
-.then(list => {
-    list.forEach(song => {
-        trHits90.push(song)});
-    })
-
- app.get('/songTr' ,(req, res) => {
-        res.send(trHits);
+    app.post('/acsessToken', async (req, res) => {
+        const { accessToken } = req.body;
+        console.log("token Route", accessToken);
+        globalAccsess = accessToken;
+        res.send(accessToken);
     });
-app.get('/songGlobal' ,(req, res) => {
-        res.send(globalHits);
+
+
+   
+
+    app.get('/songTr', async (req, res) => {
+        const artistParameters = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' +  globalAccsess
+            }
+        }
+            const artistIDResponse = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DX0FGW2dUyDef/tracks', artistParameters);
+            const data = await artistIDResponse.json();
+            res.send(data);  
     });
- app.get('/songTr90' ,(req, res) => {
-        res.send(trHits90);
+    
+    
+    
+app.get('/songGlobal' , async (req, res) => {
+    const artistParameters = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' +  globalAccsess
+        }
+    }
+            const artistIDResponse = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DX0kbJZpiYdZl/tracks', artistParameters);
+            const data = await artistIDResponse.json();
+            res.send(data);  
     });
-app.get('/songGlobal20' ,(req, res) => {
-        res.send(globalHits20);
+
+ app.get('/songTr90' , async (req, res) => {
+    const artistParameters = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' +  globalAccsess
+        }
+    }
+            const artistIDResponse = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DXb7MJRXLczzR/tracks', artistParameters);
+            const data = await artistIDResponse.json();
+            res.send(data);  
+    });
+
+app.get('/songGlobal20' , async (req, res) => {
+    const artistParameters = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' +  globalAccsess
+        }
+    }
+            const artistIDResponse = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DX4o1oenSJRJd/tracks', artistParameters);
+            const data = await artistIDResponse.json();
+            res.send(data);  
     });
 
 app.post("/addPoint", async(req, res) => {
