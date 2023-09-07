@@ -30,7 +30,7 @@ fetch('https://accounts.spotify.com/api/token', authParameters)
 useEffect(() => {
     async function sendAccessToken() {
         try {
-            await axios.post('http://localhost:5000/acsessToken', { accessToken });
+            await axios.post('https://find-song-backend.onrender.com/acsessToken', { accessToken });
         } catch (error) {
             console.error('Error sending access token:', error);
         }
