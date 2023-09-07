@@ -42,26 +42,26 @@ export default function Type() {
 }
 useEffect(() => {
   if (songType === songTr) {
-    fetchData('http://localhost:5000/songTr', setSongTr, setSongType, 'songTr');
+    fetchData('https://find-song-backend.onrender.com/songTr', setSongTr, setSongType, 'songTr');
   }
 }, [songType, songTr]);
 
 useEffect(() => {
   if (songType === songGlobal) {
-     fetchData('http://localhost:5000/songGlobal', setSongGlobal, setSongType, 'songGlobal')
+     fetchData('https://find-song-backend.onrender.com/songGlobal', setSongGlobal, setSongType, 'songGlobal')
   }
 }, [songType, songGlobal]);
 
 useEffect(() => {
   if (songType === songTr90) {
-    fetchData('http://localhost:5000/songTr90', setSongTr90, setSongType, 'songTr90');
+    fetchData('https://find-song-backend.onrender.com/songTr90', setSongTr90, setSongType, 'songTr90');
   }
 }, [songType, songTr90]);
 
 
 useEffect(() => {
   if (songType === songGlobal20) {
-    fetchData('http://localhost:5000/songGlobal20', setSongGlobal20, setSongType, 'songGlobal20');
+    fetchData('https://find-song-backend.onrender.com/songGlobal20', setSongGlobal20, setSongType, 'songGlobal20');
   }
 }, [songType, songGlobal20]);
 
