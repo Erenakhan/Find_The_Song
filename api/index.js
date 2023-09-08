@@ -37,7 +37,7 @@ const list = [];
 
 let globalAccsess = null;
 
-    app.post('/acsessToken', async (req, res) => {
+    app.post('/api/acsessToken', async (req, res) => {
         const { accessToken } = req.body;
         console.log("token Route", accessToken);
         globalAccsess = accessToken;
@@ -47,7 +47,7 @@ let globalAccsess = null;
 
    
 
-    app.get('/songTr', async (req, res) => {
+    app.get('/api/songTr', async (req, res) => {
         const artistParameters = {
             method: 'GET',
             headers: {
@@ -62,7 +62,7 @@ let globalAccsess = null;
     
     
     
-app.get('/songGlobal' , async (req, res) => {
+app.get('/api/songGlobal' , async (req, res) => {
     const artistParameters = {
         method: 'GET',
         headers: {
@@ -75,7 +75,7 @@ app.get('/songGlobal' , async (req, res) => {
             res.send(data);  
     });
 
- app.get('/songTr90' , async (req, res) => {
+ app.get('/api/songTr90' , async (req, res) => {
     const artistParameters = {
         method: 'GET',
         headers: {
@@ -88,7 +88,7 @@ app.get('/songGlobal' , async (req, res) => {
             res.send(data);  
     });
 
-app.get('/songGlobal20' , async (req, res) => {
+app.get('/api/songGlobal20' , async (req, res) => {
     const artistParameters = {
         method: 'GET',
         headers: {

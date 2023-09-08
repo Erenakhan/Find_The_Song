@@ -42,26 +42,26 @@ export default function Type() {
 }
 useEffect(() => {
   if (songType === songTr) {
-    fetchData('https://find-song-backend.onrender.com/songTr', setSongTr, setSongType, 'songTr');
+    fetchData('https://findthesong.vercel.app/api/songTr', setSongTr, setSongType, 'songTr');
   }
 }, [songType, songTr]);
 
 useEffect(() => {
   if (songType === songGlobal) {
-     fetchData('https://find-song-backend.onrender.com/songGlobal', setSongGlobal, setSongType, 'songGlobal')
+     fetchData('https://findthesong.vercel.app/api/songGlobal', setSongGlobal, setSongType, 'songGlobal')
   }
 }, [songType, songGlobal]);
 
 useEffect(() => {
   if (songType === songTr90) {
-    fetchData('https://find-song-backend.onrender.com/songTr90', setSongTr90, setSongType, 'songTr90');
+    fetchData('https://findthesong.vercel.app/api/songTr90', setSongTr90, setSongType, 'songTr90');
   }
 }, [songType, songTr90]);
 
 
 useEffect(() => {
   if (songType === songGlobal20) {
-    fetchData('https://find-song-backend.onrender.com/songGlobal20', setSongGlobal20, setSongType, 'songGlobal20');
+    fetchData('https://findthesong.vercel.app/api/songGlobal20', setSongGlobal20, setSongType, 'songGlobal20');
   }
 }, [songType, songGlobal20]);
 
