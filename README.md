@@ -2,7 +2,11 @@
 
 Welcome to Find the Song, a web application that lets users save and track their game scores while discovering new songs using Spotify URL information. This application is built using the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS.
 
-https://github.com/Erenakhan/Find_The_Song/assets/100142188/b60b2bc6-b788-4791-9752-42de4e48a7ed
+
+
+
+https://github.com/Erenakhan/Find_The_Song/assets/100142188/1e078bba-2a61-4f07-875c-06414c24bf09
+
 
 
 
@@ -12,7 +16,7 @@ You can access the live demo of the application [here](https://findthesong.verce
 
 ## Features
 
-- **Game Score Tracking**: Users can play a game where they guess the song's name based on the provided Spotify URL info. The application tracks and displays their game scores.
+- **Game Score Tracking**: Users can play a game where they guess the song's name based on the provided Spotify Api The application tracks and displays their game scores.
 
 - **Score Leaderboard**: There is a leaderboard that displays the top scores of all users, allowing friendly competition.
 
