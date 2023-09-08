@@ -30,7 +30,7 @@ fetch('https://accounts.spotify.com/api/token', authParameters)
 useEffect(() => {
     async function sendAccessToken() {
         try {
-            await axios.post('https://find-song-backend.onrender.com/acsessToken', { accessToken });
+            await axios.post('https://find-the-song.vercel.app/api/acsessToken', { accessToken });
         } catch (error) {
             console.error('Error sending access token:', error);
         }
