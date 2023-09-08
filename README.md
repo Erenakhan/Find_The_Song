@@ -16,7 +16,7 @@ You can access the live demo of the application [here](https://findthesong.verce
 
 ## Features
 
-- **Game Score Tracking**: Users can play a game where they guess the song's name based on the provided Spotify URL info. The application tracks and displays their game scores.
+- **Game Score Tracking**: Users can play a game where they guess the song's name based on the provided Spotify Api The application tracks and displays their game scores.
 
 - **Score Leaderboard**: There is a leaderboard that displays the top scores of all users, allowing friendly competition.
 
