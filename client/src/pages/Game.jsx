@@ -10,8 +10,8 @@ export default function Game() {
   const [audioPlayer, setAudioPlayer] = useState(new Audio()); 
   const [songReady, setSongReady] = useState(false); 
   const [playedSong, setPlayedSong] = useState([]);
-  const [startCount,setStartCount]=useState(6);
-  const[count,setCount]=useState(60);
+  const [startCount,setStartCount]=useState(60);
+  const[count,setCount]=useState(10);
   const [mixedSong,setMixedSong]=useState([]);
   const [gameFinished,setGameFinised]=useState(false);
   const [selected,setSelected]=useState();
@@ -136,7 +136,7 @@ export default function Game() {
   function getRandomNumber(max) {
     return Math.floor(Math.random() * max);
   }
-  let  trueCurrentPoint =  count * 19; 
+  let  trueCurrentPoint =  count * 25; 
   const check = (song) => {
     if (song === currentSong) {
       setSelected(song)
