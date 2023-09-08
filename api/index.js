@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const fetch = require('isomorphic-unfetch');
 const spotify = require('spotify-url-info');
 const { Preview,getData, getPreview, getTracks, getDetails } = spotify(fetch);
+require('dotenv').config()
 
-const uri = "mongodb+srv://erenakhan:erenakhan123@cluster0.nkwtsfn.mongodb.net/?retryWrites=true&w=majority"
+const uri = process.env.MONGO_Uri
 
 const Point = require('./models/point.js');
 
