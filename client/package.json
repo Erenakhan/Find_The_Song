@@ -16,7 +16,8 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.15.0",
-    "spotify-url-info": "^3.2.6"
+    "spotify-url-info": "^3.2.6",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

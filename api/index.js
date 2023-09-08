@@ -101,7 +101,7 @@ app.get('/api/songGlobal20' , async (req, res) => {
             res.send(data);  
     });
 
-app.post("/addPoint", async(req, res) => {
+app.post("/api/addPoint", async(req, res) => {
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const {name,point,mongooseType} =req.body;
     const newPoint = new Point({name,point,mongooseType});
@@ -109,7 +109,7 @@ app.post("/addPoint", async(req, res) => {
     res.send(userDoc);
 })
 
-app.get("/getPoint",async (req, res) =>{
+app.get("/api/getPoint",async (req, res) =>{
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     const points = await Point.find();
   res.send(points)

@@ -10,8 +10,8 @@ export default function Game() {
   const [audioPlayer, setAudioPlayer] = useState(new Audio()); 
   const [songReady, setSongReady] = useState(false); 
   const [playedSong, setPlayedSong] = useState([]);
-  const [startCount,setStartCount]=useState(60);
-  const[count,setCount]=useState(10);
+  const [startCount,setStartCount]=useState(6);
+  const[count,setCount]=useState(60);
   const [mixedSong,setMixedSong]=useState([]);
   const [gameFinished,setGameFinised]=useState(false);
   const [selected,setSelected]=useState();
@@ -147,7 +147,7 @@ export default function Game() {
       setSelected(song);
       setPoint(point - 50); 
     }
-    setCount(60);
+    setCount(10);
     setTimeout(() => {
       setSelected();
       setTarget(false);
@@ -231,7 +231,7 @@ export default function Game() {
                 `}>
                   <div className='flex gap-6  px-8'>
                   < img className='object-cover  w-20 h-20 ' src={song.album.images[0].url} />
-                <span className="font-semibold h-20 w-full  flex items-center  justify-center overflow-y-auto"> {song.name ? song.name : "-"}{" "}</span>
+                <span className="font-semibold h-20 w-full  flex items-center  justify-center overflow-y-auto text-[16px] md:text-[20px] scrollbar-hide px-4 md:px-2"> {song.name ? song.name : "-"}{" "}</span>
                   </div>
                 </div>
               ))}

@@ -49,9 +49,6 @@ export default function Result() {
       }
   }, [startGame, navigate]);
 
-
-
-
     return (
         <div className='w-screen min-h-screen flex flex-col  justify-center  md:flex-row bg-gradient-to-b from-gray-800 via-gray-500 to-gray-400'>
             <div className='md:w-1/2 ml-0 flex flex-col justify-center items-center'>
