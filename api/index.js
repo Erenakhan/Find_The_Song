@@ -84,7 +84,7 @@ app.get('/api/songGlobal' , async (req, res) => {
             'Authorization': 'Bearer ' +  globalAccsess
         }
     }
-            const artistIDResponse = await fetch('https://api.spotify.com/v1/playlists/37i9dQZF1DXb7MJRXLczzR/tracks', artistParameters);
+            const artistIDResponse = await fetch('https://api.spotify.com/v1/playlists/6UTqDw2BXq0GuvrOb7yYPA/tracks', artistParameters);
             const data = await artistIDResponse.json();
             res.send(data);  
     });
