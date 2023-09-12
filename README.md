@@ -33,7 +33,6 @@ You can access the live demo of the application [here](https://findthesong.verce
   - Express.js: A Node.js web application framework for building the server.
   - Node.js: A JavaScript runtime for server-side development.
   - Mongoose: An Object Data Modeling (ODM) library for MongoDB, used for database operations.
-  - Passport.js: A middleware for handling user authentication.
 
 - **Database**:
   - MongoDB: A NoSQL database for storing user data and game scores.
