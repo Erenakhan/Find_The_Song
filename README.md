@@ -1,6 +1,6 @@
 # Find the Song
 
-Welcome to Find the Song, a web application that lets users save and track their game scores while discovering new songs using Spotify URL information. This application is built using the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS.
+Welcome to Find the Song, a web application that lets users save and track their game scores while discovering new songs using Spotify URL information. This application is built using the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS .
 
 
 
